@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import MovieCard from "../2-molecules/MovieCard";
 
-const MovieListPortrait = ({
+const MovieListLandscape = ({
   sectionTitle,
   movies,
   filterType,
@@ -61,8 +61,8 @@ const MovieListPortrait = ({
         breakpoints={{
           // Konfigurasi responsif
           320: {
-            slidesPerView: 3.2,
-            spaceBetween: 10,
+            slidesPerView: 1.2,
+            spaceBetween: 14,
           },
           // saat layar >= 640px
           640: {
@@ -71,7 +71,7 @@ const MovieListPortrait = ({
           },
           // saat layar >= 1024px
           1024: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 20,
           },
         }}
@@ -80,8 +80,8 @@ const MovieListPortrait = ({
           <SwiperSlide key={movie.id} className="h-auto">
             <MovieCard
               movie={movie}
-              movieBadge={movieBadge}
               movieInfo={movieInfo}
+              movieBadge={movieBadge}
             />
           </SwiperSlide>
         ))}
@@ -104,4 +104,4 @@ const MovieListPortrait = ({
   );
 };
 
-export default MovieListPortrait;
+export default MovieListLandscape;
