@@ -14,6 +14,7 @@ const MovieListLandscape = ({
   filterType,
   movieBadge,
   movieInfo,
+  onMovieClick,
 }) => {
   // Gunakan useMemo agar proses filter & sort tidak berjalan di setiap render
   const processedMovies = useMemo(() => {
@@ -80,8 +81,10 @@ const MovieListLandscape = ({
           <SwiperSlide key={movie.id} className="h-auto">
             <MovieCard
               movie={movie}
+              imgSrc={movie.poster.landscape}
               movieInfo={movieInfo}
               movieBadge={movieBadge}
+              onClick={() => onMovieClick(movie)}
             />
           </SwiperSlide>
         ))}

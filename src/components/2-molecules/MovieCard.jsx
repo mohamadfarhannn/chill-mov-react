@@ -1,30 +1,30 @@
 import Badge from "../1-atoms/Badge.jsx";
 import MovieInfo from "../1-atoms/MovieInfo.jsx";
-const MovieCard = ({ movie, movieBadge = false, movieInfo = false }) => {
-  //   const renderMovieBadge = () => {
-  //     movieBadge === "true" ? <Badge type={movie.badge} /> : "";
-  //   };
 
-  //   const renderMovieInfo = () => {
-  //     movieInfo === "true" ? (
-  //       <MovieInfo title={movie.title} rating={movie.rating} />
-  //     ) : (
-  //       ""
-  //     );
-  //   };
+const MovieCard = ({
+  movie,
+  imgSrc,
+  movieBadge = false,
+  movieInfo = false,
+  onClick,
+  isWatched,
+}) => {
   return (
-    <div className="poster-card relative rounded-lg overflow-hidden cursor-pointer">
+    <div
+      className={`poster-card relative rounded-lg overflow-hidden cursor-pointer ${
+        isWatched ? "opacity-50" : ""
+      }`}
+      title={movie.title}
+      onClick={onClick}
+    >
       <img
-        src={movie.image}
+        src={imgSrc}
         alt={movie.title}
         className="w-full h-full object-cover"
       />
       {movieBadge && <Badge type={movie.badge} />}
 
       {movieInfo && <MovieInfo title={movie.title} rating={movie.rating} />}
-
-      {/* {renderMovieBadge()}
-      {renderMovieInfo()} */}
     </div>
   );
 };

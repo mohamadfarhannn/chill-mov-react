@@ -1,6 +1,6 @@
 const Button = ({
   type = "button",
-  children = "Button",
+  children = "",
   variant = "primary",
   className = "",
   iconLeft = null, // Prop ikon kiri

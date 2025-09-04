@@ -1,188 +1,30 @@
+import { useOutletContext } from "react-router-dom";
+
+// Import component
 import Button from "../1-atoms/Button";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { PiSpeakerSlash } from "react-icons/pi";
 // Component
 import MovieListPortrait from "../4-templates/MovieListPortrait";
 import MovieListLandscape from "../4-templates/MovieListLandscape";
+import MovieDetailModal from "../4-templates/MovieDetailModal";
 
-const moviesLandscape = [
-  {
-    id: 1,
-    title: "Shazam!",
-    image: "/img/poster/landscape/landscape1.png",
-    rating: "4.5/5",
-    badge: "none",
-  },
-  {
-    id: 2,
-    title: "Avatar",
-    image: "/img/poster/landscape/landscape2.png",
-    rating: "4.2/5",
-    badge: "none",
-  },
-  {
-    id: 3,
-    title: "Fast X",
-    image: "/img/poster/landscape/landscape3.png",
-    rating: "4.6/5",
-    badge: "none",
-  },
-  {
-    id: 4,
-    title: "BLUELOCK",
-    image: "/img/poster/landscape/landscape4.png",
-    rating: "4.8/5",
-    badge: "none",
-  },
-  {
-    id: 5,
-    title: "My Perfect Stranger",
-    image: "/img/poster/landscape/landscape5.png",
-    rating: "4.5/5",
-    badge: "none",
-  },
-  {
-    id: 6,
-    title: "The Batman",
-    image: "/img/poster/landscape/landscape6.png",
-    rating: "4.3/5",
-    badge: "none",
-  },
-  {
-    id: 7,
-    title: "Alice in Borderland",
-    image: "/img/poster/landscape/landscape7.png",
-    rating: "4.7/5",
-    badge: "none",
-  },
-];
-
-const moviesPortrait = [
-  {
-    id: 1,
-    title: "Little Mermaid",
-    image: "/img/poster/portrait/portrait6.png",
-    rating: "4.5/5",
-    badge: "none",
-    releaseDate: "2023-05-26",
-  },
-  {
-    id: 2,
-    title: "The Batman",
-    image: "/img/poster/portrait/portrait7.png",
-    rating: "4.2/5",
-    badge: "trending",
-    releaseDate: "2022-03-04",
-  },
-  {
-    id: 3,
-    title: "BLUELOCK",
-    image: "/img/poster/portrait/portrait5.png",
-    rating: "4.6/5",
-    badge: "newEpisode",
-    releaseDate: "2024-10-09",
-  },
-  {
-    id: 4,
-    title: "Alice in Borderland",
-    image: "/img/poster/portrait/portrait8.png",
-    rating: "4.4/5",
-    badge: "newEpisode",
-    releaseDate: "2022-12-22",
-  },
-  {
-    id: 5,
-    title: "Big Hero 6",
-    image: "/img/poster/portrait/portrait9.png",
-    rating: "4.5/5",
-    badge: "trending",
-    releaseDate: "2014-11-07",
-  },
-  {
-    id: 6,
-    title: "Missing",
-    image: "/img/poster/portrait/portrait10.png",
-    rating: "4.5/5",
-    badge: "none",
-    releaseDate: "2023-02-24",
-  },
-  {
-    id: 7,
-    title: "M3GAN",
-    image: "/img/poster/portrait/portrait11.png",
-    rating: "4.5/5",
-    badge: "none",
-    releaseDate: "2023-01-06",
-  },
-  {
-    id: 8,
-    title: "Ant Man: Quantumania",
-    image: "/img/poster/portrait/portrait12.png",
-    rating: "4.8/5",
-    badge: "trending",
-    releaseDate: "2023-06-02",
-  },
-  {
-    id: 9,
-    title: "Doctor Strange in the Multiverse of Madness",
-    image: "/img/poster/portrait/portrait13.png",
-    rating: "4.9/5",
-    badge: "trending",
-    releaseDate: "2024-03-01",
-  },
-  {
-    id: 10,
-    title: "Black Adam",
-    image: "/img/poster/portrait/portrait14.png",
-    rating: "4.7/5",
-    badge: "none",
-    releaseDate: "2023-07-06",
-  },
-  {
-    id: 11,
-    title: "Ted Lasso",
-    image: "/img/poster/portrait/portrait15.png",
-    rating: "4.6/5",
-    badge: "newEpisode",
-    releaseDate: "2023-07-21",
-  },
-  {
-    id: 12,
-    title: "Spiderman Accross the Spiderverse",
-    image: "/img/poster/portrait/portrait16.png",
-    rating: "4.5/5",
-    badge: "trending",
-    releaseDate: "2024-06-14",
-  },
-  {
-    id: 13,
-    title: "Suzume",
-    image: "/img/poster/portrait/portrait21.png",
-    rating: "4.9/5",
-    badge: "newEpisode",
-    releaseDate: "2024-11-01",
-  },
-  {
-    id: 14,
-    title: "A Man Called Otto",
-    image: "/img/poster/portrait/portrait20.png",
-    rating: "4.3/5",
-    badge: "none",
-    releaseDate: "2024-03-29",
-  },
-  {
-    id: 15,
-    title: "Jurassic World Dominion",
-    image: "/img/poster/portrait/portrait17.png",
-    rating: "4.1/5",
-    badge: "trending",
-    releaseDate: "2024-03-08",
-  },
-];
+// Import Data Movies
+import { allMovies } from "../../data/movies.js";
 
 const Homepage = () => {
+  // Ambil state dan fungsi dari WrapPage/App
+  const {
+    myMovieList,
+    addToMyList,
+    removeFromMyList,
+    selectedMovie,
+    handleMovieClick,
+    handleCloseModal,
+    toggleWatchedStatus,
+  } = useOutletContext();
   return (
-    <main className="flex flex-col flex-wrap w-full bg-[#181A1C] gap-15">
+    <main className="flex flex-col flex-wrap w-full bg-[#181A1C] gap-15 min-h-screen pb-25">
       {/* Hero Section */}
       <section className="hero-section w-full h-[360px] lg:h-[587px] flex justify-center align-center relative gap-4">
         <img
@@ -239,38 +81,56 @@ const Homepage = () => {
         {/* Film Slider Landscape 1 */}
         <MovieListLandscape
           sectionTitle="Melanjutkan Tonton Film"
-          movies={moviesLandscape}
+          movies={allMovies}
           filterType="top-rated"
           movieInfo={true}
+          onMovieClick={handleMovieClick}
         />
         {/* Film Slider Landscape 1 End */}
 
         {/* Top Rating*/}
         <MovieListPortrait
           sectionTitle="Top Rating Film dan Series Hari Ini"
-          movies={moviesPortrait}
+          movies={allMovies}
           filterType=""
           movieBadge={true}
+          onMovieClick={handleMovieClick}
         />
         {/* Top Rating End */}
 
         {/* Trending */}
         <MovieListPortrait
           sectionTitle="Film Trending"
-          movies={moviesPortrait}
+          movies={allMovies}
           filterType="trending"
           movieBadge={true}
+          onMovieClick={handleMovieClick}
         />
 
         {/* New Release */}
         <MovieListPortrait
           sectionTitle="Rilis Baru"
-          movies={moviesPortrait}
+          movies={allMovies}
           filterType="new-release"
           movieBadge={true}
+          onMovieClick={handleMovieClick}
         />
       </section>
       {/* Film Section End */}
+
+      {/* Modal Detail Movie */}
+      {selectedMovie && (
+        <MovieDetailModal
+          movie={selectedMovie}
+          onClose={handleCloseModal}
+          allMovies={allMovies}
+          myMovieList={myMovieList}
+          addToMyList={addToMyList}
+          removeFromMyList={removeFromMyList}
+          toggleWatchedStatus={toggleWatchedStatus}
+        />
+      )}
+      {/* Modal Detail Movie End */}
     </main>
   );
 };
