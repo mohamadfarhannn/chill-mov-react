@@ -11,6 +11,7 @@ const RegisterForm = () => {
         type="text"
         id="username"
         placeholder="Masukkan username..."
+        variant="secondary"
       />
       <InputForm
         label="Kata Sandi"
@@ -21,7 +22,7 @@ const RegisterForm = () => {
       <InputForm
         label="Konfirmasi Kata Sandi"
         type="password"
-        id="password"
+        id="password-confirm"
         placeholder="Masukkan kata sandi..."
       />
       <div className="flex justify-between items-center w-full">

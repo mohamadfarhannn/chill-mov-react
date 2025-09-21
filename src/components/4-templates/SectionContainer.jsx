@@ -1,4 +1,4 @@
-const MovieListSection = ({ sectionTitle, children }) => {
+const SectionContainer = ({ sectionTitle, children }) => {
   return (
     <section className="w-full px-5 py-5 lg:py-10 lg:px-[80px] relative">
       <h2 className="text-white text-xl lg:text-2xl font-bold mb-4">
@@ -8,4 +8,4 @@ const MovieListSection = ({ sectionTitle, children }) => {
     </section>
   );
 };
-export default MovieListSection;
+export default SectionContainer;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { IoPersonSharp, IoStar, IoLogOutOutline } from "react-icons/io5";
 
 const links = [
-  { label: "Profil", icon: <IoPersonSharp />, path: "/profile" },
+  { label: "Profil", icon: <IoPersonSharp />, path: "/myprofile" },
   { label: "Ubah Premium", icon: <IoStar />, path: "/premium" },
   { label: "Keluar", icon: <IoLogOutOutline />, path: "/login" },
 ];

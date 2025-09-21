@@ -1,4 +1,5 @@
-import { useOutletContext } from "react-router-dom";
+// import { useOutletContext } from "react-router-dom";
+import { useMovieStore } from "../../store/movieStore.js";
 
 // Import component
 import Button from "../1-atoms/Button";
@@ -10,19 +11,13 @@ import MovieListLandscape from "../4-templates/MovieListLandscape";
 import MovieDetailModal from "../4-templates/MovieDetailModal";
 
 // Import Data Movies
-import { allMovies } from "../../data/movies.js";
+// import { allMovies } from "../../data/movies.js";
 
 const Homepage = () => {
-  // Ambil state dan fungsi dari WrapPage/App
-  const {
-    myMovieList,
-    addToMyList,
-    removeFromMyList,
-    selectedMovie,
-    handleMovieClick,
-    handleCloseModal,
-    toggleWatchedStatus,
-  } = useOutletContext();
+  // Get state and action from useMovieStore
+  const { allMovies, selectedMovie, handleMovieClick, handleCloseModal } =
+    useMovieStore();
+
   return (
     <main className="flex flex-col flex-wrap w-full bg-[#181A1C] gap-15 min-h-screen pb-25">
       {/* Hero Section */}
@@ -124,10 +119,6 @@ const Homepage = () => {
           movie={selectedMovie}
           onClose={handleCloseModal}
           allMovies={allMovies}
-          myMovieList={myMovieList}
-          addToMyList={addToMyList}
-          removeFromMyList={removeFromMyList}
-          toggleWatchedStatus={toggleWatchedStatus}
         />
       )}
       {/* Modal Detail Movie End */}

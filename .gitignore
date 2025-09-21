@@ -32,3 +32,6 @@ storybook-static
 # Storybook source files (TAMBAHAN BARU)
 .storybook
 /src/stories
+
+# Environtment Variables
+.env

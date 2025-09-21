@@ -1,17 +1,14 @@
+import { useMovieStore } from "../../store/movieStore";
 import { FaCheck, FaPlay, FaPlus, FaEye, FaUndo } from "react-icons/fa";
 import { PiSpeakerSimpleSlashFill } from "react-icons/pi";
 import MovieCard from "../2-molecules/MovieCard";
 import Button from "../1-atoms/Button";
 
-const MovieDetailModal = ({
-  movie,
-  onClose,
-  allMovies,
-  myMovieList,
-  addToMyList,
-  removeFromMyList,
-  toggleWatchedStatus,
-}) => {
+const MovieDetailModal = ({ movie, onClose, allMovies }) => {
+  // Get state dan action from useMovieStore
+  const { myMovieList, addToMyList, removeFromMyList, toggleWatchedStatus } =
+    useMovieStore();
+
   const recommendations = allMovies
     .filter((item) => item.id !== movie.id)
     .slice(0, 3);
@@ -20,10 +17,16 @@ const MovieDetailModal = ({
     e.stopPropagation();
   };
 
+  // console.log("myMovieList:", myMovieList);
   // cek apakah film ada di daftar saya
-  const myListItem = myMovieList.find((item) => item.id === movie.id);
+  const myListItem = myMovieList.find(
+    (item) => String(item.movieId) === String(movie.id)
+  );
+  // console.log("myListItem:", myListItem);
   const isInMyList = !!myListItem; //nilai true jika ditemukan
+  // console.log("isInMyList:", isInMyList);
   const isWatched = myListItem ? myListItem.isWatched : false;
+  // console.log("isWatched:", isWatched);
 
   return (
     <div
@@ -61,6 +64,7 @@ const MovieDetailModal = ({
                     Mulai
                   </Button>
                   <Button
+                    className="add-remove-button"
                     type="button"
                     variant="outlined"
                     title={
@@ -69,15 +73,14 @@ const MovieDetailModal = ({
                         : "Tambah ke Daftar Saya"
                     }
                     onClick={() =>
-                      isInMyList
-                        ? removeFromMyList(movie.id)
-                        : addToMyList(movie)
+                      isInMyList ? removeFromMyList(movie) : addToMyList(movie)
                     }
                   >
                     {isInMyList ? <FaCheck /> : <FaPlus />}
                   </Button>
                   {isInMyList && (
                     <Button
+                      className="toggle-watch-button"
                       type="button"
                       variant="outlined"
                       title={
@@ -85,7 +88,7 @@ const MovieDetailModal = ({
                           ? "Tandai Belum Ditonton"
                           : "Tandai Sudah Ditonton"
                       }
-                      onClick={() => toggleWatchedStatus(movie.id)}
+                      onClick={() => toggleWatchedStatus(movie)}
                     >
                       {isWatched ? <FaUndo /> : <FaEye />}
                     </Button>

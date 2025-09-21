@@ -13,12 +13,14 @@ const Form = () => {
         type="text"
         id="username"
         placeholder="Masukkan username..."
+        variant="secondary"
       />
       <InputForm
         label="Kata Sandi"
         type="password"
         id="password"
         placeholder="Masukkan kata sandi..."
+        variant="secondary"
       />
       <div className="flex justify-between items-center w-full">
         <span className="flex gap-1 text-[#9D9EA1] text-[10px] lg:text-[16px]">
